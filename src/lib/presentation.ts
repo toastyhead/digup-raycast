@@ -1,10 +1,16 @@
-import { homedir } from "node:os";
+import { pathToFileURL } from "node:url";
 import { SearchHit } from "./digup";
 
-export function friendlyPath(path: string): string {
-  return path.startsWith(homedir() + "/")
-    ? "~" + path.slice(homedir().length)
-    : path;
+export function resultPreview(hit: SearchHit): string {
+  if (hit.kind === "image" || hit.kind === "screenshot") {
+    const url = pathToFileURL(hit.path);
+    url.searchParams.set("raycast-height", "340");
+    // Angle brackets keep parentheses in local filenames inside the Markdown URL.
+    return `![Preview](<${url.href}>)`;
+  }
+  return hit.excerpt
+    ? literalMarkdown(hit.excerpt)
+    : "Use Quick Look (⌘Y) to preview this file.";
 }
 
 export function clock(seconds: number): string {

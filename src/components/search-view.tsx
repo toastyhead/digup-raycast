@@ -9,13 +9,12 @@ import {
   Keyboard,
 } from "@raycast/api";
 import { useMemo, useState } from "react";
-import { basename, dirname } from "node:path";
+import { basename } from "node:path";
 import { Filter, normalizeQuery, runCLI, SearchHit } from "../lib/digup";
 import {
   clock,
   editorURL,
-  friendlyPath,
-  literalMarkdown,
+  resultPreview,
   location,
   mediaMoment,
 } from "../lib/presentation";
@@ -205,42 +204,7 @@ export default function SearchView({
           icon={{ fileIcon: hit.path }}
           accessories={location(hit) ? [{ text: location(hit) }] : []}
           quickLook={{ path: hit.path, name: basename(hit.path) }}
-          detail={
-            <List.Item.Detail
-              markdown={
-                hit.excerpt
-                  ? literalMarkdown(hit.excerpt)
-                  : "No text excerpt for this match. Use Quick Look to preview the file."
-              }
-              metadata={
-                <List.Item.Detail.Metadata>
-                  <List.Item.Detail.Metadata.Label
-                    title="Type"
-                    text={
-                      hit.kind === "doc"
-                        ? "Document"
-                        : hit.kind[0].toUpperCase() + hit.kind.slice(1)
-                    }
-                  />
-                  {location(hit) && (
-                    <List.Item.Detail.Metadata.Label
-                      title="Match"
-                      text={location(hit)}
-                    />
-                  )}
-                  <List.Item.Detail.Metadata.Label
-                    title="Folder"
-                    text={friendlyPath(dirname(hit.path))}
-                  />
-                  <List.Item.Detail.Metadata.Separator />
-                  <List.Item.Detail.Metadata.Label
-                    title="Search"
-                    text="On this Mac · DigUp"
-                  />
-                </List.Item.Detail.Metadata>
-              }
-            />
-          }
+          detail={<List.Item.Detail markdown={resultPreview(hit)} />}
           actions={
             <ResultActions
               hit={hit}

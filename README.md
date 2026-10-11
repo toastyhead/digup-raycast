@@ -10,7 +10,7 @@ Search the files on your Mac by what is in them, directly from Raycast. This ext
 | **Search Code**       | Search the repositories enabled in DigUp's code settings.                                 |
 | **Check DigUp Setup** | Find the helper, inspect both indexes, and show setup instructions.                       |
 
-Searches preserve DigUp's ranking. Results include excerpts and page, timestamp, or line locations when available. Actions open the file, reveal it in Finder, show Quick Look, and copy the file, path, or excerpt. Supported code editors open at the matching line. A recording can open at its matching timestamp in QuickTime.
+Searches preserve DigUp's ranking. Images and screenshots appear directly in the preview pane. Other results show text excerpts when available, with page, timestamp, or line locations beside the result. Actions open the file, reveal it in Finder, show Quick Look, and copy the file, path, or excerpt. Supported code editors open at the matching line. A recording can open at its matching timestamp in QuickTime.
 
 ## Requirements
 
