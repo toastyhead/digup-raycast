@@ -1,0 +1,161 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "digup-local-search",
+  "version": "1.0.0",
+  "title": "DigUp",
+  "description": "Search your Mac by meaning with DigUp's local EmbeddingGemma index.",
+  "icon": "icon.png",
+  "author": "rizwan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toastyhead/digup-raycast.git"
+  },
+  "homepage": "https://github.com/toastyhead/digup-raycast#readme",
+  "bugs": {
+    "url": "https://github.com/toastyhead/digup-raycast/issues"
+  },
+  "platforms": [
+    "macOS"
+  ],
+  "categories": [
+    "Productivity",
+    "Developer Tools"
+  ],
+  "keywords": [
+    "semantic",
+    "local",
+    "files",
+    "embeddinggemma",
+    "code"
+  ],
+  "commands": [
+    {
+      "name": "search-files",
+      "title": "Search Files",
+      "subtitle": "DigUp",
+      "description": "Find documents, photos, recordings, and videos by what is in them.",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "type": "text",
+          "placeholder": "Describe a file",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "search-code",
+      "title": "Search Code",
+      "subtitle": "DigUp",
+      "description": "Find code by what it does in the folders enabled in DigUp.",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "type": "text",
+          "placeholder": "Describe some code",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "setup",
+      "title": "Check DigUp Setup",
+      "subtitle": "DigUp",
+      "description": "Check the local search helper and indexes, or open DigUp to set them up.",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "executablePath",
+      "title": "DigUp CLI Path",
+      "type": "textfield",
+      "required": false,
+      "description": "Optional full path to the digup executable. Automatically finds the helper inside DigUp.app in Applications.",
+      "placeholder": "/Applications/DigUp.app/Contents/Helpers/digup"
+    },
+    {
+      "name": "indexDirectory",
+      "title": "Index Directory",
+      "type": "directory",
+      "required": false,
+      "description": "Optional custom index folder. Defaults to ~/Library/Application Support/DigUp/index.noindex."
+    },
+    {
+      "name": "maxResults",
+      "title": "Maximum Results",
+      "type": "dropdown",
+      "required": false,
+      "default": "20",
+      "description": "Maximum matches returned per search.",
+      "data": [
+        {
+          "title": "20",
+          "value": "20"
+        },
+        {
+          "title": "50",
+          "value": "50"
+        },
+        {
+          "title": "100",
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "name": "codeEditor",
+      "title": "Open Code In",
+      "type": "dropdown",
+      "required": false,
+      "default": "default",
+      "description": "Supported editors open at the matched line. The default application opens the file normally.",
+      "data": [
+        {
+          "title": "Default Application",
+          "value": "default"
+        },
+        {
+          "title": "Visual Studio Code",
+          "value": "vscode"
+        },
+        {
+          "title": "Cursor",
+          "value": "cursor"
+        },
+        {
+          "title": "Windsurf",
+          "value": "windsurf"
+        }
+      ]
+    }
+  ],
+  "engines": {
+    "node": ">=22.22.2"
+  },
+  "scripts": {
+    "dev": "ray develop",
+    "build": "ray build -e dist -o dist",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:integration": "tsx --test tests/integration/*.test.ts"
+  },
+  "dependencies": {
+    "@raycast/api": "1.104.25",
+    "react": "19.0.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "2.2.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.0"
+  }
+}
